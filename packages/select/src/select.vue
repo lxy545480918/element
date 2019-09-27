@@ -503,8 +503,16 @@
       },
 
       emitChange(val) {
+        var _this7 = this;
         if (!valueEquals(this.value, val)) {
-          this.$emit('change', val);
+          var label;
+          if (Array.isArray(val)) {
+            label = [];
+            val.forEach(function(value) {
+              label.push(_this7.getOption(value).currentLabel);
+            });
+          } else { label = this.getOption(val).currentLabel;}
+          this.$emit('change', val, label);
         }
       },
 
